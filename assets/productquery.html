@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<script type="text/javascript" src="./jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./jquery.mobile-1.4.2.min.js"></script>
+	<script type="text/javascript" src="./jquery.json-2.4.js"></script>
+	<script type="text/javascript" src="./json2.js"></script>
+
+	<link rel="stylesheet" href="./jquery.mobile-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.external-png-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.icons-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.inline-png-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.inline-svg-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.structure-1.4.2.min.css">
+	<link rel="stylesheet" href="./jquery.mobile.theme-1.4.2.min.css">
+	<script type="text/javascript" src="./bussjs/app.js"></script>
+	<script type="text/javascript" src="./bussjs/commonFunction.js"></script>
+	<script type="text/javascript" src="./bussjs/products.js"></script>
+	<script type="text/javascript" src="./bussjs/userlogin.js"></script>
+</head>
+
+<body>
+	<div class="container" style="">
+		<div style="float: center; margin: 0px auto;">
+			<input type="hidden" id="pro_life_code" value="" />
+			<input type="hidden" id="product_type" value="" />
+			<input type="hidden" id="pro_status" value="" />
+			<input type="hidden" id="min_buy_code" value="" />
+			<input type="hidden" id="bouns_rate" value="" />
+			<input type="hidden" id="earn_type" value="" />
+			<input type="hidden" id="bonus_times" value="" />
+			<input type="hidden" id="project_type" value="" />
+			<input type="hidden" id="issue_company" value="" />
+			<input type="hidden" id="issue_date_end" value="" />
+			<input type="hidden" id="product_name" value="" />
+			<input type="hidden" id="issue_date_start" value="" />
+
+			<div>
+				<div id="products"></div>
+				<table align="center">
+					<tr>
+						<td colspan="7" align="center" id="pagenavigator"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		query(1);
+	});
+
+	function navClickPre(o) {
+		var pagenum = parseInt($(o).attr("nav"));
+		query(pagenum);
+	}
+
+	function navClickNex(o) {
+		var pagenum = parseInt($(o).attr("nav"));
+		query(pagenum);
+	}
+
+	function btnclick(o) {
+		var val = $(o).attr("value");
+		var name = $(o).attr("name");
+		if(val === "" && name === "date15"){
+			return;
+		}
+		$("#" + name).val(val);
+		$("[name='" + name + "']").each(function(idx, idxo) {
+			if ($(idxo).attr("value") == $(o).attr("value")) {
+				$(idxo).removeClass("btn-default");
+				$(idxo).addClass("btn-warning");
+			} else {
+				$(idxo).removeClass("btn-warning");
+				$(idxo).addClass("btn-default");
+			}
+		});
+		query(1);
+	}
+
+	function query(pagenum) {
+		var pro_life_code = $('#pro_life_code').val();
+		var pro_status = $('#pro_status').val();
+		var min_buy_code = $('#min_buy_code').val();
+		var bouns_rate = $('#bouns_rate').val();
+		var product_name = $("#product_name").val();
+		var issue_date_start = $("#issue_date_start").val();
+		var issue_date_end = $("#issue_date_end").val();
+		var product_type = $("#product_type").val();
+		var earn_type = $("#earn_type").val();
+		var bonus_times = $("#bonus_times").val();
+		var issue_company = $("#issue_company").val();
+		var project_type = $("#project_type").val();
+		queryProducts(product_name, pro_life_code, pro_status, min_buy_code, bouns_rate, issue_date_start, issue_date_end,
+				product_type, pagenum, earn_type, bonus_times, issue_company, project_type);
+
+	}
+	</script>
+</body>
+</html>
