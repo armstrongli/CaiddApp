@@ -1,6 +1,5 @@
 jQuery.extend({
 	applyProductsList : function(reqJson) {
-		$.log(JSON.stringify(reqJson));
 		return ApplyReqResp.applyProductsList(JSON.stringify(reqJson));
 	},
 	applyLogin : function(reqJson) {
